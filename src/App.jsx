@@ -78,7 +78,7 @@ const App = () => {
         <div className="sm:w-3/4 md:w-3/4 lg:w-3/4  min-h-96 bg-white text-[#34004d]  rounded-xl">
           <h2 className="flex items-center p-5 justify-center">
             To-Do App
-            <img src="src\assets\notebook.gif" alt="" className="size-[45px]" />
+            <img src="/notebook.gif" alt="" className="size-[45px]" />
           </h2>
           <div className="bg-[#34004d] w-full h-[2px]"></div>
           <div className="flex items-center flex-col">
@@ -150,7 +150,7 @@ const App = () => {
                   >
                     DELETE{" "}
                     <img
-                      src="src/assets/trash-bin.gif"
+                      src="/trash-bin.gif"
                       alt=""
                       className="size-[20px] md:size-[35px] bg-transparent mix-blend-color-burn"
                     />

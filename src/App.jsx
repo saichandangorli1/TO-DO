@@ -8,7 +8,7 @@ const App = () => {
   const [todos, setTodos] = useState([]);
   // let id = "";
 
-  const notify = () => toast("Task Added!");
+  const notify = () => toast(`New Task Added!🥳🥳`);
 
   useEffect(() => {
     let Data = localStorage.getItem("todos");
@@ -65,17 +65,20 @@ const App = () => {
       <ToastContainer
         className="toaster-container text-xl"
         position="top-right"
-        autoClose={111111100}
-        hideProgressBar={true}
-        newestOnTop={false}
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
+        pauseOnHover
+        theme="dark"
+        
       />
       <h1 className="text-center mt-9">TO-DO APP</h1>
       <div className=" flex justify-center m-5 sm:text-xs md:text-xl lg:text-lg mr-10 ">
-        <div className="sm:w-3/4 md:w-3/4 lg:w-3/4  min-h-96 bg-white text-[#34004d]  rounded-xl">
+        <div className="sm:w-3/4 md:w-3/4 lg:w-3/4  min-h-96 bg-white text-[#34004d] mb-[80px]  rounded-xl">
           <h2 className="flex items-center p-5 justify-center">
             To-Do App
             <img src="/notebook.gif" alt="" className="size-[45px]" />
@@ -107,7 +110,7 @@ const App = () => {
             </button>
           </div>
           <div className="md:mx-28 lg:mx-28 mx-10 my-5">
-            {todos.map((ele) => {
+            {/* {todos.map((ele) => {
               return (
                 <div
                   className="flex items-center justify-between mb-2 "
@@ -157,11 +160,83 @@ const App = () => {
                   </button>
                 </div>
               );
-            })}
+            })} */}
+
+{todos.filter((ele) => !ele.isComp).map((ele) => (
+  <div className="flex items-center justify-between mb-2" key={ele.id}>
+    <div className={`flex gap-10 items-center ${ele.isComp ? "line-through italic" : ""}`}>
+      <input
+        type="checkbox"
+        name={ele.id}
+        onChange={handleCheck}
+        value={ele.isComp}
+        checked={ele.isComp}
+        className="accent-[#34004d] w-[10px] sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4 bg-purple-600"
+        id="purple-checkbox"
+      />
+      <label htmlFor={ele.id}>
+        {" "}
+        <li
+          className={`list-none flex text-[12px] md:text-lg ${ele.isComp ? "line-through italic" : ""}`}
+          id={ele.id}
+        >
+          {ele.todo}
+        </li>
+      </label>
+    </div>
+    <button
+      type="button"
+      onClick={(e) => {
+        handleDelete(e, ele.id);
+      }}
+      onChange={saveToLocalStorage}
+      className="bg-[#34004d] text-white px-4 py-2 rounded-lg flex items-center w-[71px] h-[30px] text-[8px] md:w-28 md:h-10 md:text-xs"
+    >
+      DELETE{" "}
+      <img src="/trash-bin.gif" alt="" className="size-[20px] md:size-[35px] bg-transparent mix-blend-color-burn" />
+    </button>
+  </div>
+))}
+{todos.filter((ele) => ele.isComp).map((ele) => (
+  <div className="flex items-center justify-between mb-2" key={ele.id}>
+    <div className={`flex gap-10 items-center ${ele.isComp ? "line-through italic" : ""}`}>
+      <input
+        type="checkbox"
+        name={ele.id}
+        onChange={handleCheck}
+        value={ele.isComp}
+        checked={ele.isComp}
+        className="accent-[#34004d] w-[10px] sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4 bg-purple-600"
+        id="purple-checkbox"
+      />
+      <label htmlFor={ele.id}>
+        {" "}
+        <li
+          className={`list-none flex text-[12px] md:text-lg ${ele.isComp ? "line-through italic" : ""}`}
+          id={ele.id}
+        >
+          {ele.todo}
+        </li>
+      </label>
+    </div>
+    <button
+      type="button"
+      onClick={(e) => {
+        handleDelete(e, ele.id);
+      }}
+      onChange={saveToLocalStorage}
+      className="bg-[#34004d] text-white px-4 py-2 rounded-lg flex items-center w-[71px] h-[30px] text-[8px] md:w-28 md:h-10 md:text-xs"
+    >
+      DELETE{" "}
+      <img src="/trash-bin.gif" alt="" className="size-[20px] md:size-[35px] bg-transparent mix-blend-color-burn" />
+    </button>
+  </div>
+))}
+
           </div>
         </div>
       </div>
-      <footer className="bg-gray-200 text-black text-center py-4 absolute bottom-0 w-full">
+      <footer className="bg-gray-200 text-black text-center py-4 fixed bottom-0 mt-10 w-full">
       <p className="text-sm">TaskTrove | Created by Saichandan Gorli</p>
       <p className="text-xs">© {currentYear} All Rights Reserved</p>
     </footer>

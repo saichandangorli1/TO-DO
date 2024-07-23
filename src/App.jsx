@@ -41,10 +41,23 @@ const App = () => {
       return i.id !== id;
     });
     setTodos(newTodos);
+    saveToLocalStorage();
     // console.log(todos);
     // console.log(id);
-    saveToLocalStorage();
   };
+  const handleEdit = (e,id) => {
+    const t = todos.filter((i)=>{
+      return i.id === id
+    })
+    setTodo(t[0].todo)
+
+    let newTodos = todos.filter((i) => {
+      return i.id !== id;
+    });
+    setTodos(newTodos);
+    saveToLocalStorage();
+  }
+  
 
   const handleCheck = (e) => {
     let id = e.target.name;
@@ -74,7 +87,6 @@ const App = () => {
         draggable
         pauseOnHover
         theme="dark"
-        
       />
       <h1 className="text-center mt-9">TO-DO APP</h1>
       <div className=" flex justify-center m-5 sm:text-xs md:text-xl lg:text-lg mr-10 ">
@@ -162,84 +174,147 @@ const App = () => {
               );
             })} */}
 
-{todos.filter((ele) => !ele.isComp).map((ele) => (
-  <div className="flex items-center justify-between mb-2" key={ele.id}>
-    <div className={`flex gap-10 items-center ${ele.isComp ? "line-through italic" : ""}`}>
-      <input
-        type="checkbox"
-        name={ele.id}
-        onChange={handleCheck}
-        value={ele.isComp}
-        checked={ele.isComp}
-        className="accent-[#34004d] w-[10px] sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4 bg-purple-600"
-        id="purple-checkbox"
-      />
-      <label htmlFor={ele.id}>
-        {" "}
-        <li
-          className={`list-none flex text-[12px] md:text-lg ${ele.isComp ? "line-through italic" : ""}`}
-          id={ele.id}
-        >
-          {ele.todo}
-        </li>
-      </label>
-    </div>
-    <button
-      type="button"
-      onClick={(e) => {
-        handleDelete(e, ele.id);
-      }}
-      onChange={saveToLocalStorage}
-      className="bg-[#34004d] text-white px-4 py-2 rounded-lg flex items-center w-[71px] h-[30px] text-[8px] md:w-28 md:h-10 md:text-xs"
-    >
-      DELETE{" "}
-      <img src="/trash-bin.gif" alt="" className="size-[20px] md:size-[35px] bg-transparent mix-blend-color-burn" />
-    </button>
-  </div>
-))}
-{todos.filter((ele) => ele.isComp).map((ele) => (
-  <div className="flex items-center justify-between mb-2" key={ele.id}>
-    <div className={`flex gap-10 items-center ${ele.isComp ? "line-through italic" : ""}`}>
-      <input
-        type="checkbox"
-        name={ele.id}
-        onChange={handleCheck}
-        value={ele.isComp}
-        checked={ele.isComp}
-        className="accent-[#34004d] w-[10px] sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4 bg-purple-600"
-        id="purple-checkbox"
-      />
-      <label htmlFor={ele.id}>
-        {" "}
-        <li
-          className={`list-none flex text-[12px] md:text-lg ${ele.isComp ? "line-through italic" : ""}`}
-          id={ele.id}
-        >
-          {ele.todo}
-        </li>
-      </label>
-    </div>
-    <button
-      type="button"
-      onClick={(e) => {
-        handleDelete(e, ele.id);
-      }}
-      onChange={saveToLocalStorage}
-      className="bg-[#34004d] text-white px-4 py-2 rounded-lg flex items-center w-[71px] h-[30px] text-[8px] md:w-28 md:h-10 md:text-xs"
-    >
-      DELETE{" "}
-      <img src="/trash-bin.gif" alt="" className="size-[20px] md:size-[35px] bg-transparent mix-blend-color-burn" />
-    </button>
-  </div>
-))}
-
+            {todos
+              .filter((ele) => !ele.isComp)
+              .map((ele) => (
+                <div
+                  className="flex items-center justify-between mb-2"
+                  key={ele.id}
+                >
+                  <div
+                    className={`flex gap-2 sm:gap-4 items-center ${
+                      ele.isComp ? "line-through italic" : ""
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      name={ele.id}
+                      onChange={handleCheck}
+                      value={ele.isComp}
+                      checked={ele.isComp}
+                      className="accent-[#34004d] w-[10px] sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4 bg-purple-600"
+                      id="purple-checkbox"
+                    />
+                    <label htmlFor={ele.id}>
+                      {" "}
+                      <li
+                        className={`list-none flex text-[12px] md:text-lg ${
+                          ele.isComp ? "line-through italic" : ""
+                        }`}
+                        id={ele.id}
+                      >
+                        {ele.todo}
+                      </li>
+                    </label>
+                  </div>
+                  <div className="flex gap-2 sm:gap-6">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        handleEdit(e, ele.id);
+                      }}
+                      onChange={saveToLocalStorage}
+                      className="bg-transparent border-[2px] border-[#34004d] text-[#34004d] px-3 sm:px-4 py-2 rounded-lg flex items-center w-[55px] h-[25px] text-[8px] sm:w-20 sm:h-10 md:text-xs"
+                    >
+                      EDIT{" "}
+                      <img
+                        src="/text-box.gif"
+                        alt=""
+                        className="size-[15px] md:size-[25px]"
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        handleDelete(e, ele.id);
+                      }}
+                      onChange={saveToLocalStorage}
+                      className="bg-[#34004d] text-white px-2 sm:px-4 py-2 rounded-lg flex items-center w-[55px] h-[25px] text-[8px] sm:w-24 sm:h-10 md:text-xs"
+                    >
+                      DELETE{" "}
+                      <img
+                        src="/trash-bin.gif"
+                        alt=""
+                        className="size-[15px] sm:size-[30px] bg-transparent mix-blend-color-burn"
+                      />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            {todos
+              .filter((ele) => ele.isComp)
+              .map((ele) => (
+                <div
+                  className="flex items-center justify-between mb-2"
+                  key={ele.id}
+                >
+                  <div
+                    className={`flex gap-2 sm:gap-4 items-center ${
+                      ele.isComp ? "line-through italic" : ""
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      name={ele.id}
+                      onChange={handleCheck}
+                      value={ele.isComp}
+                      checked={ele.isComp}
+                      className="accent-[#34004d] w-[10px] sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4 bg-purple-600"
+                      id="purple-checkbox"
+                    />
+                    <label htmlFor={ele.id}>
+                      {" "}
+                      <li
+                        className={`list-none flex text-[12px] md:text-lg ${
+                          ele.isComp ? "line-through italic" : ""
+                        }`}
+                        id={ele.id}
+                      >
+                        {ele.todo}
+                      </li>
+                    </label>
+                  </div>
+                  <div className="flex gap-2 sm:gap-6">
+                  {/* <button
+                      type="button"
+                      onClick={(e) => {
+                        handleDelete(e, ele.id);
+                      }}
+                      onChange={saveToLocalStorage}
+                      className="bg-transparent border-[2px] border-[#34004d] text-[#34004d] px-3 sm:px-4 py-2 rounded-lg flex items-center w-[55px] h-[25px] text-[8px] sm:w-20 sm:h-10 md:text-xs"
+                    >
+                      EDIT{" "}
+                      <img
+                        src="/text-box.gif"
+                        alt=""
+                        className="size-[15px] md:size-[25px]"
+                      />
+                    </button> */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        handleDelete(e, ele.id);
+                      }}
+                      onChange={saveToLocalStorage}
+                      className="bg-[#34004d] text-white px-2 sm:px-4 py-2 rounded-lg flex items-center w-[55px] h-[25px] text-[8px] sm:w-24 sm:h-10 md:text-xs"
+                    >
+                      DELETE{" "}
+                      <img
+                        src="/trash-bin.gif"
+                        alt=""
+                        className="size-[15px] sm:size-[30px] bg-transparent mix-blend-color-burn"
+                      />
+                    </button>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </div>
       <footer className="bg-gray-200 text-black text-center py-4 fixed bottom-0 mt-10 w-full">
-      <p className="text-sm">TaskTrove | Created by Saichandan Gorli</p>
-      <p className="text-xs">© {currentYear} All Rights Reserved</p>
-    </footer>
+        <p className="text-sm">TaskTrove | Created by Saichandan Gorli</p>
+        <p className="text-xs">© {currentYear} All Rights Reserved</p>
+      </footer>
     </div>
   );
 };

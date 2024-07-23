@@ -89,9 +89,9 @@ const App = () => {
       />
       {/* public\notebook.gif */}
 
-      <div className=" flex justify-center items-center min-h-screen m-5 sm:text-xs md:text-xl lg:text-lg mr-10 ">
-        <div className="sm:w-3/4 md:w-3/4 lg:w-3/4  min-h-96 bg-white text-[#34004d] mb-[80px]  rounded-xl">
-          <h2 className="flex items-center p-5 justify-center">
+      <div className=" flex justify-center items-start min-h-screen w-full my-5 sm:text-xs md:text-xl lg:text-lg p-8 ">
+        <div className="sm:w-3/4 md:w-3/4 lg:w-3/4  min-h-96 bg-white flex justify-center items-center flex-col text-[#34004d] mb-[80px]   rounded-xl">
+          <h2 className="flex items-center p-5 justify-center w-full">
             TaskTrove
             <img src="/notebook.gif" alt="" className="size-[45px]" />
           </h2>
@@ -101,9 +101,10 @@ const App = () => {
               type="text"
               name=""
               id=""
-              className="shadow-lg border-slate-950 border mx-10 my-6 rounded-lg py-2 w-3/4 px-4 outline-none"
+              className="shadow-lg border-slate-950 border mx-10 my-6 rounded-lg py-2 sm:w-full px-4 outline-none"
               autoFocus
               onChange={handleChange}
+              maxLength={60}
               value={todo}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -115,7 +116,7 @@ const App = () => {
             />
             <button
               type="submit"
-              className="bg-[#520178] text-white rounded-lg px-6 py-2 md:px-10 md:py-3 mr-5 disabled:bg-[#c64ffd] disabled:text-gray-700"
+              className="bg-[#520178] sm:w-full text-white rounded-lg px-6 py-2 md:px-10 md:py-3 w-2/3 disabled:bg-[#c64ffd] disabled:text-gray-700"
               onClick={handleAdd}
               onChange={saveToLocalStorage}
               disabled={todo.length === 0 || todo.charAt(0) === " "}
@@ -123,59 +124,7 @@ const App = () => {
               ADD
             </button>
           </div>
-          <div className="md:mx-28 lg:mx-28 mx-10 my-5">
-            {/* {todos.map((ele) => {
-              return (
-                <div
-                  className="flex items-center justify-between mb-2 "
-                  key={ele.id}
-                >
-                  <div
-                    className={`flex gap-10 items-center ${
-                      ele.isComp ? "line-through italic" : " "
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      name={ele.id}
-                      onChange={handleCheck}
-                      value={ele.isComp}
-                      checked={ele.isComp}
-                      className=" accent-[#34004d] w-[10px] sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4 bg-purple-600"
-                      id="purple-checkbox"
-                    />
-
-                    <label htmlFor={ele.id}>
-                      {" "}
-                      <li
-                        className={`list-none flex text-[12px] md:text-lg  ${
-                          ele.isComp ? "line-through italic" : " "
-                        } `}
-                        id={ele.id}
-                      >
-                        {ele.todo}
-                      </li>
-                    </label>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      handleDelete(e, ele.id);
-                    }}
-                    onChange={saveToLocalStorage}
-                    className="bg-[#34004d] text-white px-4 py-2 rounded-lg flex items-center w-[71px] h-[30px] text-[8px] md:w-28 md:h-10 md:text-xs "
-                  >
-                    DELETE{" "}
-                    <img
-                      src="/trash-bin.gif"
-                      alt=""
-                      className="size-[20px] md:size-[35px] bg-transparent mix-blend-color-burn"
-                    />
-                  </button>
-                </div>
-              );
-            })} */}
-
+          <div className="md:mx-28 lg:mx-28 mx-5 my-5">
             {todos
               .filter((ele) => !ele.isComp)
               .map((ele) => (

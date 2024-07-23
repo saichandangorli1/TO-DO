@@ -129,7 +129,7 @@ const App = () => {
               .filter((ele) => !ele.isComp)
               .map((ele) => (
                 <div
-                  className="flex items-center justify-between mb-2"
+                  className="flex items-center justify-between gap-3 mb-2"
                   key={ele.id}
                 >
                   <div
@@ -196,7 +196,7 @@ const App = () => {
               .filter((ele) => ele.isComp)
               .map((ele) => (
                 <div
-                  className="flex items-center justify-between mb-2"
+                  className="flex items-center justify-between gap-3 mb-2"
                   key={ele.id}
                 >
                   <div

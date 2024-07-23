@@ -45,19 +45,18 @@ const App = () => {
     // console.log(todos);
     // console.log(id);
   };
-  const handleEdit = (e,id) => {
-    const t = todos.filter((i)=>{
-      return i.id === id
-    })
-    setTodo(t[0].todo)
+  const handleEdit = (e, id) => {
+    const t = todos.filter((i) => {
+      return i.id === id;
+    });
+    setTodo(t[0].todo);
 
     let newTodos = todos.filter((i) => {
       return i.id !== id;
     });
     setTodos(newTodos);
     saveToLocalStorage();
-  }
-  
+  };
 
   const handleCheck = (e) => {
     let id = e.target.name;
@@ -89,11 +88,11 @@ const App = () => {
         theme="dark"
       />
       {/* public\notebook.gif */}
-      <h1 className="text-center mt-9">TO-DO APP</h1>
-      <div className=" flex justify-center m-5 sm:text-xs md:text-xl lg:text-lg mr-10 ">
+
+      <div className=" flex justify-center items-center min-h-screen m-5 sm:text-xs md:text-xl lg:text-lg mr-10 ">
         <div className="sm:w-3/4 md:w-3/4 lg:w-3/4  min-h-96 bg-white text-[#34004d] mb-[80px]  rounded-xl">
           <h2 className="flex items-center p-5 justify-center">
-            To-Do App
+            TaskTrove
             <img src="/notebook.gif" alt="" className="size-[45px]" />
           </h2>
           <div className="bg-[#c64ffd] w-full h-[2px]"></div>
@@ -108,16 +107,18 @@ const App = () => {
               value={todo}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleAdd();
+                  if (todo.charAt(0) !== " ") {
+                    handleAdd();
+                  }
                 }
               }}
             />
             <button
               type="submit"
-              className="bg-[#34004d] text-white rounded-lg px-6 py-2 md:px-10 md:py-3 mr-5 disabled:bg-[#520178] disabled:text-gray-500"
+              className="bg-[#520178] text-white rounded-lg px-6 py-2 md:px-10 md:py-3 mr-5 disabled:bg-[#c64ffd] disabled:text-gray-700"
               onClick={handleAdd}
               onChange={saveToLocalStorage}
-              disabled={todo.length === 0}
+              disabled={todo.length === 0 || todo.charAt(0) === " "}
             >
               ADD
             </button>
@@ -215,7 +216,7 @@ const App = () => {
                         handleEdit(e, ele.id);
                       }}
                       onChange={saveToLocalStorage}
-                      className="bg-transparent border-[2px] border-[#34004d] text-[#34004d] px-3 sm:px-4 py-2 rounded-lg flex items-center w-[55px] h-[25px] text-[8px] sm:w-20 sm:h-10 md:text-xs"
+                      className="bg-transparent border-[2px] border-[#34004d] text-[#34004d]  px-3 sm:px-4 py-2 rounded-lg flex items-center w-[55px] h-[25px] text-[8px] sm:w-20 sm:h-10 md:text-xs"
                     >
                       EDIT{" "}
                       <img
@@ -276,7 +277,7 @@ const App = () => {
                     </label>
                   </div>
                   <div className="flex gap-2 sm:gap-6">
-                  {/* <button
+                    {/* <button
                       type="button"
                       onClick={(e) => {
                         handleDelete(e, ele.id);
@@ -313,7 +314,7 @@ const App = () => {
         </div>
       </div>
       <footer className="bg-gray-200 text-black text-center py-4 fixed bottom-0 mt-10 w-full">
-        <p className="text-sm">TaskTrove | Created by Saichandan Gorli</p>
+        <p className="text-sm">TaskTrove | Developed by Saichandan Gorli</p>
         <p className="text-xs">© {currentYear} All Rights Reserved</p>
       </footer>
     </div>

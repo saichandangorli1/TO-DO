@@ -88,6 +88,7 @@ const App = () => {
         pauseOnHover
         theme="dark"
       />
+      {/* public\notebook.gif */}
       <h1 className="text-center mt-9">TO-DO APP</h1>
       <div className=" flex justify-center m-5 sm:text-xs md:text-xl lg:text-lg mr-10 ">
         <div className="sm:w-3/4 md:w-3/4 lg:w-3/4  min-h-96 bg-white text-[#34004d] mb-[80px]  rounded-xl">
@@ -95,7 +96,7 @@ const App = () => {
             To-Do App
             <img src="/notebook.gif" alt="" className="size-[45px]" />
           </h2>
-          <div className="bg-[#34004d] w-full h-[2px]"></div>
+          <div className="bg-[#c64ffd] w-full h-[2px]"></div>
           <div className="flex items-center flex-col">
             <input
               type="text"
